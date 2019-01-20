@@ -1,13 +1,37 @@
 # http://www.ssk.or.jp/seikyushiharai/rezept/iryokikan/iryokikan_02.files/jiki_i01.pdf
+# TODO: refactor
 
 require 'yaml'
 require 'csv'
 
-payers = YAML.load_file('01_payers.yaml')
-prefectures = YAML.load_file('02_prefectures.yaml')
-receipt = YAML.load_file('05_receipt.yml')
-byomei = YAML.load_file('99_byomei.yml')
-tensu = YAML.load_file('99_tensu.yml')
+payers = YAML.load_file('db/01_payers.yml')
+prefectures = YAML.load_file('db/02_prefectures.yml')
+tensuhyo = YAML.load_file('db/03_tensuhyo.yml')
+era = YAML.load_file('db/04_era.yml')
+receipt = YAML.load_file('db/05_receipt.yml')
+danzyo = YAML.load_file('db/06_danzyo.yml')
+byoto = YAML.load_file('db/07_byoto.yml')
+futan = YAML.load_file('db/08_futan.yml')
+tokki = YAML.load_file('db/09_tokki.yml')
+shinryoka = YAML.load_file('db/10_shinryoka.yml')
+bui = YAML.load_file('db/11_bui.yml')
+seibetsu = YAML.load_file('db/12_seibetsu.yml')
+igakushochi = YAML.load_file('db/13_igakushochi.yml')
+tokuteishippei = YAML.load_file('db/14_tokuteshippei.yml')
+shokumujiyu = YAML.load_file('db/15_shokumujiyu.yml')
+genmen = YAML.load_file('db/16_genmen.yml')
+santeriyu = YAML.load_file('db/17_santeriyu.yml')
+tenki = YAML.load_file('db/18_tenki.yml')
+shubyo = YAML.load_file('db/19_shubyo.yml')
+shinryoshikibetsu = YAML.load_file('db/20_shinryoshikibetsu.yml')
+futan = YAML.load_file('db/21_futan.yml')
+tokutekizai = YAML.load_file('db/22_tokutekizai.yml')
+zoki = YAML.load_file('db/24_zoki.yml')
+zokiiryokikan = YAML.load_file('db/25_zokiiryokikan.yml')
+zokireceipt = YAML.load_file('db/26_zokireceipt.yml')
+status = YAML.load_file('db/27_status.yml')
+byomei = YAML.load_file('db/98_byomei.yml')
+tensu = YAML.load_file('db/99_tensu.yml')
 
 uke = CSV.read('uke.csv')
 uke.each do |r|
