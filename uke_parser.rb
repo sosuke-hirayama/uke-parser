@@ -1,5 +1,5 @@
-# http://www.ssk.or.jp/seikyushiharai/rezept/iryokikan/iryokikan_02.files/jiki_i01.pdf
 # TODO: refactor
+# http://www.ssk.or.jp/seikyushiharai/rezept/iryokikan/iryokikan_02.files/jiki_i01.pdf
 
 require 'yaml'
 require 'csv'
@@ -26,6 +26,7 @@ shubyo = YAML.load_file('db/19_shubyo.yml')
 shinryoshikibetsu = YAML.load_file('db/20_shinryoshikibetsu.yml')
 futan = YAML.load_file('db/21_futan.yml')
 tokutekizai = YAML.load_file('db/22_tokutekizai.yml')
+shojoshoki = YAML.load_file('db/23_shojoshoki.yml')
 zoki = YAML.load_file('db/24_zoki.yml')
 zokiiryokikan = YAML.load_file('db/25_zokiiryokikan.yml')
 zokireceipt = YAML.load_file('db/26_zokireceipt.yml')
@@ -33,7 +34,7 @@ status = YAML.load_file('db/27_status.yml')
 byomei = YAML.load_file('db/98_byomei.yml')
 tensu = YAML.load_file('db/99_tensu.yml')
 
-uke = CSV.read('uke.csv')
+uke = CSV.read('uke/02.csv')
 uke.each do |r|
   case r[0]
   when 'IR' then
@@ -53,13 +54,13 @@ uke.each do |r|
     p "レセプト種別:#{receipt[r[2]]}"
     p "診療年月:#{r[3]}"
     p "氏名:#{r[4]}"
-    p "男女区分:#{r[5]}"
+    p "男女区分:#{danzyo[r[5]]}"
     p "生年月日:#{r[6]}"
     p "給付割合:#{r[7]}"
     p "入院年月日:#{r[8]}"
-    p "病棟区分:#{r[9]}"
-    p "一部負担金・食事療養費・生活療養費標準負担額区分:#{r[10]}"
-    p "レセプト特記事項:#{r[11]}"
+    p "病棟区分:#{byoto[r[9]]}"
+    p "一部負担金・食事療養費・生活療養費標準負担額区分:#{futan[r[10]]}"
+    p "レセプト特記事項:#{tokki[r[11]]}"
     p "病床数:#{r[12]}"
     p "カルテ番号等:#{r[13]}"
     p "割引点数単価:#{r[14]}"
@@ -69,23 +70,23 @@ uke.each do |r|
     p "検索番号:#{r[18]}"
     p "記録条件仕様年月情報:#{r[19]}"
     p "請求情報:#{r[20]}"
-    p "診療科名:#{r[21]}"
-    p "人体の部位等:#{r[22]}"
-    p "性別等:#{r[23]}"
-    p "医学的処置:#{r[24]}"
-    p "特定疾病:#{r[25]}"
-    p "診療科名:#{r[26]}"
-    p "人体の部位等:#{r[27]}"
-    p "性別等:#{r[28]}"
-    p "医学的処置:#{r[29]}"
-    p "特定疾病:#{r[30]}"
-    p "診療科名:#{r[31]}"
-    p "人体の部位等:#{r[32]}"
-    p "性別等:#{r[33]}"
-    p "医学的処置:#{r[34]}"
-    p "特定疾病:#{r[35]}"
+    p "診療科名:#{shinryoka[r[21]]}"
+    p "人体の部位等:#{bui[r[22]]}"
+    p "性別等:#{seibetsu[r[23]]}"
+    p "医学的処置:#{igakushochi[r[24]]}"
+    p "特定疾病:#{tokuteishippei[r[25]]}"
+    p "診療科名:#{shinryoka[r[26]]}"
+    p "人体の部位等:#{bui[r[27]]}"
+    p "性別等:#{seibetsu[r[28]]}"
+    p "医学的処置:#{igakushochi[r[29]]}"
+    p "特定疾病:#{tokuteishippei[r[30]]}"
+    p "診療科名:#{shinryoka[r[31]]}"
+    p "人体の部位等:#{bui[r[32]]}"
+    p "性別等:#{seibetsu[r[33]]}"
+    p "医学的処置:#{igakushochi[r[34]]}"
+    p "特定疾病:#{tokuteishippei[r[35]]}"
     p "カタカナ(氏名):#{r[36]}"
-    p "患者の状態:#{r[37]}"
+    p "患者の状態:#{status[r[37]]}"
   when 'HO' then
     p "--- HO: 保険者レコード --- "
     p "保険者番号:#{r[1]}"
@@ -96,11 +97,11 @@ uke.each do |r|
     p "予備:#{r[6]}"
     p "食事療養回数:#{r[7]}"
     p "食事療養合計金額:#{r[8]}"
-    p "職務上の事由:#{r[9]}"
+    p "職務上の事由:#{shokumujiyu[r[9]]}"
     p "証明書番号:#{r[10]}"
     p "負担金額医療保険:#{r[11]}"
-    p "減免区分:#{r[12]}"
-    p "減額割合:#{r[13]}"
+    p "減免区分:#{genmen[r[12]]}"
+    p "減額割合:#{r[13]}%"
   when 'KO' then
     p "--- KO: 公費レコード --- "
     p "公費負担者番号:#{r[1]}"
@@ -116,21 +117,21 @@ uke.each do |r|
     p "食事療養・生活療養合計金額:#{r[11]}"
   when 'GR' then
     p "--- GR: 包括評価対象外理由レコード --- "
-    p "医科点数表算定理由:#{r[1]}"
+    p "医科点数表算定理由:#{santeriyu[r[1]]}"
     p "DPCコード:#{r[1]}"
   when 'SY' then
     p "--- SY: 傷病名レコード --- "
     p "傷病名コード:#{byomei[r[1]]}"
     p "診療開始日:#{r[2]}"
-    p "転帰区分:#{r[3]}"
+    p "転帰区分:#{tenki[r[3]]}"
     p "修飾語コード:#{r[4]}"
     p "傷病名称:#{r[5]}"
-    p "主傷病:#{r[6]}"
+    p "主傷病:#{shubyo[r[6]]}"
     p "補足コメント:#{r[7]}"
   when 'SI' then
     p "--- SI: 診療行為レコード --- "
-    p "診療識別:#{r[1]}"
-    p "負担区分:#{r[2]}"
+    p "診療識別:#{shinryoshikibetsu[r[1]]}"
+    p "負担区分:#{futan[r[2]]}"
     p "診療行為コード:#{tensu[r[3]]}"
     p "数量データ:#{r[4]}"
     p "点数:#{r[5]}"
@@ -140,12 +141,15 @@ uke.each do |r|
     p "コメントコード2:#{r[9]}"
     p "文字データ2:#{r[10]}"
     p "コメントコード3:#{r[11]}"
-    p "文字データ3:#{r[12]}"
+    p "文字データ3:#{r[12]}"    
     # (14)~(44) 算定日情報1日の情報~算定日情報31日の情報
+    days = ''
+    r[13..43].map.with_index { |d, i| days += "#{i} " if d == '1'}
+    p "算定日: #{days}"
   when 'IY' then
     p "--- IY: 医薬品レコード --- "
-    p "診療識別:#{r[1]}"
-    p "負担区分:#{r[2]}"
+    p "診療識別:#{shinryoshikibetsu[r[1]]}"
+    p "負担区分:#{futan[r[2]]}"
     p "医薬品コード:#{r[3]}"
     p "使用量:#{r[4]}"
     p "点数:#{r[5]}"
@@ -157,10 +161,13 @@ uke.each do |r|
     p "コメントコード3:#{r[11]}"
     p "文字コード3:#{r[12]}"
     # (14)~(44) 算定日情報1日の情報~算定日情報31日の情報
+    days = ''
+    r[13..43].map.with_index { |d, i| days += "#{i} " if d == '1'}
+    p "算定日: #{days}"
   when 'TO' then
     p "--- CO: 特定器材レコード --- "
-    p "診療識別:#{r[1]}"
-    p "負担区分:#{r[2]}"
+    p "診療識別:#{shinryoshikibetsu[r[1]]}"
+    p "負担区分:#{futan[r[2]]}"
     p "特定器材コード:#{r[3]}"
     p "使用量:#{r[4]}"
     p "点数:#{r[5]}"
@@ -176,22 +183,25 @@ uke.each do |r|
     p "コメントコード3:#{r[15]}"
     p "文字データ3:#{r[16]}"
     # (18)~(48) 1日の情報~31日の情報
+    days = ''
+    r[17..47].map.with_index { |d, i| days += "#{i} " if d == '1'}
+    p "算定日: #{days}"
   when 'CO' then
     p "--- CO: コメントレコード --- "
-    p "診療識別:#{r[1]}"
-    p "負担区分:#{r[2]}"
+    p "診療識別:#{shinryoshikibetsu[r[1]]}"
+    p "負担区分:#{futan[r[2]]}"
     p "コメントコード:#{r[3]}"
     p "文字データ:#{r[4]}"
   when 'SJ' then
     p "--- SJ: コメントレコード --- "
     p "症状詳記区分:#{r[1]}"
-    p "症状詳記データ:#{r[2]}"
+    p "症状詳記データ:#{shojoshoki[r[2]]}"
     when 'TI' then
     p "--- TI: 臓器提供医療機関情報レコード --- "
     p "臓器提供区分:#{r[1]}"
     p "臓器提供医療機関区分:#{r[2]}"
-    p "都道府県:#{r[3]}"
-    p "点数表:#{r[4]}"
+    p "都道府県:#{prefectures[r[3]]}"
+    p "点数表:#{tensuhyo[r[4]]}"
     p "医療機関コード:#{r[5]}"
     p "予備:#{r[6]}"
     p "医療機関名称:#{r[7]}"
@@ -203,13 +213,13 @@ uke.each do |r|
     p "臓器提供者レセプト種別:#{r[2]}"
     p "診療年月:#{r[3]}"
     p "予備:#{r[4]}"
-    p "男女区分:#{r[5]}"
+    p "男女区分:#{danzyo[r[5]]}"
     p "生年月日:#{r[6]}"
     p "予備:#{r[7]}"
     p "入院年月日:#{r[8]}"
-    p "病棟区分:#{r[9]}"
+    p "病棟区分:#{byoto[r[9]]}"
     p "予備:#{r[10]}"
-    p "レセプト特記事項:#{r[11]}"
+    p "レセプト特記事項:#{tokki[r[11]]}"
     p "予備:#{r[12]}"
     p "カルテ番号等:#{r[13]}"
     p "割引点数単価:#{r[14]}"
