@@ -34,7 +34,7 @@ status = YAML.load_file('db/27_status.yml')
 byomei = YAML.load_file('db/98_byomei.yml')
 tensu = YAML.load_file('db/99_tensu.yml')
 
-uke = CSV.read('uke/02.csv')
+uke = CSV.read('uke/06.csv')
 uke.each do |r|
   case r[0]
   when 'IR' then
@@ -165,7 +165,7 @@ uke.each do |r|
     r[13..43].map.with_index { |d, i| days += "#{i} " if d == '1'}
     p "算定日: #{days}"
   when 'TO' then
-    p "--- CO: 特定器材レコード --- "
+    p "--- TO: 特定器材レコード --- "
     p "診療識別:#{shinryoshikibetsu[r[1]]}"
     p "負担区分:#{futan[r[2]]}"
     p "特定器材コード:#{r[3]}"
@@ -193,10 +193,10 @@ uke.each do |r|
     p "コメントコード:#{r[3]}"
     p "文字データ:#{r[4]}"
   when 'SJ' then
-    p "--- SJ: コメントレコード --- "
+    p "--- SJ: 症状詳記レコード --- "
     p "症状詳記区分:#{r[1]}"
     p "症状詳記データ:#{shojoshoki[r[2]]}"
-    when 'TI' then
+  when 'TI' then
     p "--- TI: 臓器提供医療機関情報レコード --- "
     p "臓器提供区分:#{r[1]}"
     p "臓器提供医療機関区分:#{r[2]}"
