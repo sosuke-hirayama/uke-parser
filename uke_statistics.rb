@@ -67,7 +67,7 @@ sy01, sy03, sy06 = nil
 si01, si02, si03, si05, si06 = nil
 iy01, iy02, iy03, iy04, iy05, iy06 = nil
 
-uke = CSV.read('uke/06.csv')
+uke = CSV.read('uke/kokuho_201811.csv')
 uke.each do |r|
   case r[0]
   when 'IR' then

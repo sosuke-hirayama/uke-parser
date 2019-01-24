@@ -34,7 +34,7 @@ status = YAML.load_file('db/27_status.yml')
 byomei = YAML.load_file('db/98_byomei.yml')
 tensu = YAML.load_file('db/99_tensu.yml')
 
-uke = CSV.read('uke/06.csv')
+uke = CSV.read('uke/07.csv')
 uke.each do |r|
   case r[0]
   when 'IR' then
