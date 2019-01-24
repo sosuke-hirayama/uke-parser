@@ -82,7 +82,7 @@ uke.each do |r|
     raws.push({
       gn01: 'patient', 
       ir01: ir01,
-      r04: ir04,
+      ir04: ir04,
       ir06: ir06,
       ir07: ir07,
       re03: re03=r[3].extend(Wareki).to_seireki,
@@ -94,7 +94,7 @@ uke.each do |r|
     raws.push({
       gn01: 'payer', 
       ir01: ir01,
-      r04: ir04,
+      ir04: ir04,
       ir06: ir06,
       ir07: ir07,
       re03: re03,
@@ -109,13 +109,13 @@ uke.each do |r|
     raws.push({
       gn01: 'payer', 
       ir01: ir01,
-      r04: ir04,
+      ir04: ir04,
       ir06: ir06,
       ir07: ir07,
       re03: re03,
-      re05: re03,
-      re06: re03,
-      re13: re03,
+      re05: re05,
+      re06: re06,
+      re13: re13,
       ko01: ko01=r[1],
       ko04: ko04=r[4],
       ko05: ko05=r[5]
@@ -124,7 +124,7 @@ uke.each do |r|
     raws.push({
       gn01: 'disease', 
       ir01: ir01,
-      r04: ir04,
+      ir04: ir04,
       ir06: ir06,
       ir07: ir07,
       re03: re03,
@@ -139,7 +139,7 @@ uke.each do |r|
     raws.push({
       gn01: 'practice', 
       ir01: ir01,
-      r04: ir04,
+      ir04: ir04,
       ir06: ir06,
       ir07: ir07,
       re03: re03,
@@ -156,7 +156,7 @@ uke.each do |r|
     raws.push({
       gn01: 'drug', 
       ir01: ir01,
-      r04: ir04,
+      ir04: ir04,
       ir06: ir06,
       ir07: ir07,
       re03: re03,
