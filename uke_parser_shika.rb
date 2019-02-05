@@ -4,9 +4,9 @@
 require 'yaml'
 require 'csv'
 
-payers = YAML.load_file('code/01_payers.yml')
-prefectures = YAML.load_file('code/02_prefectures.yml')
-tensuhyo = YAML.load_file('code/03_tensuhyo.yml')
+payers = YAML.load_file('code/common/payers.yml')
+prefectures = YAML.load_file('code/common/prefectures.yml')
+tensuhyo = YAML.load_file('code/common/tensuhyo.yml')
 
 uke = CSV.read('uke/shika_shaho.csv')
 uke.each do |r|
