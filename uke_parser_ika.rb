@@ -1,4 +1,3 @@
-# TODO: refactor
 # http://www.ssk.or.jp/seikyushiharai/rezept/iryokikan/iryokikan_02.files/jiki_i01.pdf
 
 require 'yaml'
@@ -20,7 +19,6 @@ shubyo = YAML.load_file('code/common/shubyo.yml')
 shinryoshikibetsu = YAML.load_file('code/common/shinryoshikibetsu.yml')
 tokutekizai = YAML.load_file('code/common/tokutekizai.yml')
 status = YAML.load_file('code/common/status.yml')
-
 futan = YAML.load_file('code/ika/futan.yml')
 shinryoka = YAML.load_file('code/ika/shinryoka.yml')
 bui = YAML.load_file('code/ika/bui.yml')
@@ -31,7 +29,6 @@ shojoshoki = YAML.load_file('code/ika/shojoshoki.yml')
 zoki = YAML.load_file('code/ika/zoki.yml')
 zokiiryokikan = YAML.load_file('code/ika/zokiiryokikan.yml')
 zokireceipt = YAML.load_file('code/ika/zokireceipt.yml')
-
 syobyo = YAML.load_file('master/shobyo.yml')
 ikashinryokoi = YAML.load_file('master/ikashinryokoi.yml')
 
@@ -142,8 +139,7 @@ uke.each do |r|
     p "コメントコード2:#{r[9]}"
     p "文字データ2:#{r[10]}"
     p "コメントコード3:#{r[11]}"
-    p "文字データ3:#{r[12]}"    
-    # (14)~(44) 算定日情報1日の情報~算定日情報31日の情報
+    p "文字データ3:#{r[12]}"
     days = ''
     r[13..43].map.with_index { |d, i| days += "#{i} " if d == '1'}
     p "算定日: #{days}"
@@ -161,7 +157,6 @@ uke.each do |r|
     p "文字コード2:#{r[10]}"
     p "コメントコード3:#{r[11]}"
     p "文字コード3:#{r[12]}"
-    # (14)~(44) 算定日情報1日の情報~算定日情報31日の情報
     days = ''
     r[13..43].map.with_index { |d, i| days += "#{i} " if d == '1'}
     p "算定日: #{days}"
@@ -183,7 +178,6 @@ uke.each do |r|
     p "文字データ2:#{r[14]}"
     p "コメントコード3:#{r[15]}"
     p "文字データ3:#{r[16]}"
-    # (18)~(48) 1日の情報~31日の情報
     days = ''
     r[17..47].map.with_index { |d, i| days += "#{i} " if d == '1'}
     p "算定日: #{days}"
