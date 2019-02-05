@@ -32,8 +32,8 @@ zoki = YAML.load_file('code/ika/zoki.yml')
 zokiiryokikan = YAML.load_file('code/ika/zokiiryokikan.yml')
 zokireceipt = YAML.load_file('code/ika/zokireceipt.yml')
 
-byomei = YAML.load_file('master/byomei.yml')
-tensu = YAML.load_file('master/tensu.yml')
+syobyo = YAML.load_file('master/shobyo.yml')
+ikashinryokoi = YAML.load_file('master/ikashinryokoi.yml')
 
 uke = CSV.read('uke/05.csv')
 uke.each do |r|
@@ -122,7 +122,7 @@ uke.each do |r|
     p "DPCコード:#{r[1]}"
   when 'SY' then
     p "--- SY: 傷病名レコード --- "
-    p "傷病名コード:#{byomei[r[1]]}"
+    p "傷病名コード:#{syobyo[r[1]]}"
     p "診療開始日:#{r[2]}"
     p "転帰区分:#{tenki[r[3]]}"
     p "修飾語コード:#{r[4]}"
@@ -133,7 +133,7 @@ uke.each do |r|
     p "--- SI: 診療行為レコード --- "
     p "診療識別:#{shinryoshikibetsu[r[1]]}"
     p "負担区分:#{futan[r[2]]}"
-    p "診療行為コード:#{tensu[r[3]]}"
+    p "診療行為コード:#{ikashinryokoi[r[3]]}"
     p "数量データ:#{r[4]}"
     p "点数:#{r[5]}"
     p "回数:#{r[6]}"
