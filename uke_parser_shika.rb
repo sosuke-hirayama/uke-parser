@@ -7,6 +7,10 @@ require 'csv'
 payers = YAML.load_file('code/common/payers.yml')
 prefectures = YAML.load_file('code/common/prefectures.yml')
 tensuhyo = YAML.load_file('code/common/tensuhyo.yml')
+shinryoshikibetsu = YAML.load_file('code/common/shinryoshikibetsu.yml')
+syobyo = YAML.load_file('master/shobyo.yml')
+shikashinryokoi = YAML.load_file('master/shikashinryokoi.yml')
+iyakuhin = YAML.load_file('master/iyakuhin.yml')
 
 uke = CSV.read('uke/shika_shaho.csv')
 uke.each do |r|
@@ -80,8 +84,9 @@ uke.each do |r|
     p "--- HS: 傷病名部位レコード --- "
     p "診療開始日:#{r[1]}"
     p "転帰区分:#{r[2]}"
+    # 6桁 (歯種4桁+状態1桁+部分1桁) * 複数歯
     p "歯式（傷病名）:#{r[3]}"
-    p "傷病名コード:#{r[4]}"
+    p "傷病名コード:#{syobyo[r[4]]}"
     p "修飾語コード:#{r[5]}"
     p "傷病名称:#{r[6]}"
     p "併存傷病名数:#{r[7]}"
@@ -92,9 +97,9 @@ uke.each do |r|
     p "歯式（補足コメント）:#{r[12]}"
   when 'SS' then
     p "--- SS: 歯科診療行為レコード --- "
-    p "診療識別:#{r[1]}"
+    p "診療識別:#{shinryoshikibetsu[r[1]]}"
     p "負担区分:#{r[2]}"
-    p "診療行為コード:#{r[3]}"
+    p "診療行為コード:#{shikashinryokoi[r[3]]}"
     p "診療行為数量データ１:#{r[4]}"
     p "診療行為数量データ２:#{r[5]}"
     p "加算コード１:#{r[6]}"
@@ -118,7 +123,7 @@ uke.each do |r|
     p "--- IY: 医薬品レコード --- "
     p "診療識別:#{r[1]}"
     p "負担区分:#{r[2]}"
-    p "医薬品コード:#{r[3]}"
+    p "医薬品コード:#{iyakuhin[r[3]]}"
     p "使用量:#{r[4]}"
     p "点数:#{r[5]}"
     p "回数:#{r[6]}"
